@@ -6,6 +6,7 @@ from kivy.app import App
 from kivy.lang import Builder
 import requests
 
+
 GUI = Builder.load_file("tela.kv")
 
 class MeuAplicativo(App):
@@ -33,6 +34,7 @@ class MeuAplicativo(App):
 ##     "timestamp":"1638798264",
 ##     "create_date":"2021-12-06 10:44:24"
 ##  }
+## https://docs.awesomeapi.com.br/api-de-moedas
 
     def on_start(self):
         self.root.ids["moeda1"].text = f"Dólar R$ {self.pegar_cotacao('USD')}"
@@ -45,8 +47,9 @@ class MeuAplicativo(App):
         x_url          = f"https://economia.awesomeapi.com.br/last/{currency}-BRL"
         x_request      = requests.get(x_url)
         x_request_json = x_request.json()
-        currency = x_request_json[f"{currency}BRL"]["bid"]
+        currency       = x_request_json[f"{currency}BRL"]["bid"]
         return currency
+
 
 
 MeuAplicativo().run()
